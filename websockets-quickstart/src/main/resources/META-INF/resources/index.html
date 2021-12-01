@@ -1,176 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title>websockets-quickstart - 1.0.0-SNAPSHOT</title>
+    <title>Quarkus Chat!</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+
     <style>
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            line-height: 1.5;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-        }
-
-        h2 {
-            font-size: 2rem
-        }
-
-        h3 {
-            font-size: 1.75rem
-
-        }
-
-        h4 {
-            font-size: 1.5rem
-        }
-
-        h5 {
-            font-size: 1.25rem
-        }
-
-        h6 {
-            font-size: 1rem
-        }
-
-        .lead {
-            font-weight: 300;
-            font-size: 2rem;
-        }
-
-        .banner {
-            font-size: 2.7rem;
-            margin: 0;
-            padding: 2rem 1rem;
-            background-color: #0d1c2c;
-            color: white;
-        }
-
-        body {
-            margin: 0;
-            font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        }
-
-        code {
-            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 87.5%;
-            color: #e83e8c;
-            word-break: break-word;
-        }
-
-        .left-column {
-            padding: .75rem;
-            max-width: 75%;
-            min-width: 55%;
-        }
-
-        .right-column {
-            padding: .75rem;
-            max-width: 25%;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        li {
-            margin: 0.75rem;
-        }
-
-        .right-section {
-            margin-left: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        .right-section h3 {
-            padding-top: 0;
-            font-weight: 200;
-        }
-
-        .right-section ul {
-            border-left: 0.3rem solid #71aeef;
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .provided-code {
-            border-left: 0.3rem solid #71aeef;
-            padding-left: 10px;
-        }
-
-        .provided-code h3 {
-            font-weight: 200;
+        #chat {
+            resize: none;
+            overflow: hidden;
+            min-height: 300px;
+            max-height: 300px;
         }
     </style>
 </head>
+
 <body>
-
-<div class="banner lead">
-    Your new Cloud-Native application is ready!
-</div>
-
+<nav class="navbar navbar-default navbar-pf" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <p><strong>>> Quarkus Chat!</strong></p>
+        </a>
+    </div>
+</nav>
 <div class="container">
-    <div class="left-column">
-        <p class="lead"> Congratulations, you have created a new Quarkus cloud application.</p>
-
-        <h2>What is this page?</h2>
-
-        <p>This page is served by Quarkus. The source is in
-            <code>src/main/resources/META-INF/resources/index.html</code>.</p>
-
-        <h2>What are your next steps?</h2>
-
-        <p>If not already done, run the application in <em>dev mode</em> using: <code>./mvnw compile quarkus:dev</code>.
-        </p>
-        <ul>
-            <li>Your static assets are located in <code>src/main/resources/META-INF/resources</code>.</li>
-            <li>Configure your application in <code>src/main/resources/application.properties</code>.</li>
-            <li>Quarkus now ships with a <a href="/q/dev/">Dev UI</a> (available in dev mode only)</li>
-            <li>Play with the provided code located in <code>src/main/java</code>:</li>
-        </ul>
-                <div class="provided-code">
-            <h3>WebSockets</h3>
-            <p>WebSocket communication channel starter code</p>
-            
-            <p><a href="https://quarkus.io/guides/websockets" class="guide-link" target="_blank">Related guide section...</a></p>
-        </div>
-
+    <br/>
+    <div class="row">
+        <input id="name" class="col-md-4" type="text" placeholder="your name">
+        <button id="connect" class="col-md-1 btn btn-primary" type="button">connect</button>
+        <br/>
+        <br/>
     </div>
-    <div class="right-column">
-        <div class="right-section">
-            <h3>Application</h3>
-            <ul>
-                <li>GroupId: <code>org.acme</code></li>
-                <li>ArtifactId: <code>websockets-quickstart</code></li>
-                <li>Version: <code>1.0.0-SNAPSHOT</code></li>
-                <li>Quarkus Version: <code>2.5.0.Final</code></li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h3>Do you like Quarkus?</h3>
-            <ul>
-                <li>Go give it a star on <a href="https://github.com/quarkusio/quarkus">GitHub</a>.</li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h3>Selected extensions guides</h3>
-            <ul>
-                <li title="WebSocket communication channel support"><a href="https://quarkus.io/guides/websockets" target="_blank">WebSockets guide</a></li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h3>More reading</h3>
-            <ul>
-                <li><a href="https://quarkus.io/guides/maven-tooling" target="_blank">Setup your IDE</a></li>
-                <li><a href="https://quarkus.io/guides/getting-started" target="_blank">Getting started</a></li>
-                <li><a href="https://quarkus.io/guides/" target="_blank">All guides</a></li>
-                <li><a href="https://quarkus.io" target="_blank">Quarkus Web Site</a></li>
-            </ul>
-        </div>
+    <div class="row">
+        <textarea class="col-md-8" id="chat"></textarea>
     </div>
+    <div class="row">
+        <input class="col-md-6" id="msg" type="text" placeholder="enter your message">
+        <button class="col-md-1 btn btn-primary" id="send" type="button" disabled>send</button>
+    </div>
+
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>
+
+<script type="text/javascript">
+    var connected = false;
+    var socket;
+
+    $( document ).ready(function() {
+        $("#connect").click(connect);
+        $("#send").click(sendMessage);
+
+        $("#name").keypress(function(event){
+            if(event.keyCode == 13 || event.which == 13) {
+                connect();
+            }
+        });
+
+        $("#msg").keypress(function(event) {
+            if(event.keyCode == 13 || event.which == 13) {
+                sendMessage();
+            }
+        });
+
+        $("#chat").change(function() {
+            scrollToBottom();
+        });
+
+        $("#name").focus();
+    });
+
+    var connect = function() {
+        if (! connected) {
+            var name = $("#name").val();
+            console.log("Val: " + name);
+            socket = new WebSocket("ws://" + location.host + "/start-websocket/" + name);
+            socket.onopen = function() {
+                connected = true;
+                console.log("Connected to the web socket");
+                $("#send").attr("disabled", false);
+                $("#connect").attr("disabled", true);
+                $("#name").attr("disabled", true);
+                $("#msg").focus();
+            };
+            socket.onmessage =function(m) {
+                console.log("Got message: " + m.data);
+                $("#chat").append(m.data + "\n");
+                scrollToBottom();
+            };
+        }
+    };
+
+    var sendMessage = function() {
+        if (connected) {
+            var value = $("#msg").val();
+            console.log("Sending " + value);
+            socket.send(value);
+            $("#msg").val("");
+        }
+    };
+
+    var scrollToBottom = function () {
+        $('#chat').scrollTop($('#chat')[0].scrollHeight);
+    };
+
+</script>
 </body>
+
 </html>
